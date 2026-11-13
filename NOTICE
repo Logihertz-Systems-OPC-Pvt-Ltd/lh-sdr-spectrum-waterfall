@@ -1,0 +1,17 @@
+Logihertz SDR Spectrum & Waterfall Engine (lh-sdr-spectrum-waterfall)
+Copyright 2026 Logihertz Systems (OPC) Private Limited.
+
+This product includes software developed by Logihertz Systems (OPC) Private Limited
+(https://logihertz.com/).
+
+Product:       lh-sdr-spectrum-waterfall (bin/lh-waterfall)
+Architecture:  Zero-Dependency TypeScript 60fps WebGL2/WebGPU Spectrum & Waterfall Engine
+Components:    Radix-2 Cooley-Tukey FFT, Blackman-Harris Windowing, dBFS PSD Processor,
+               256-Entry RGBA8 Colormaps, O(1) Circular Ring-Buffer Shaders, and
+               10-Rule SDR Telemetry Dashboard Posture Auditor.
+License:       Apache License, Version 2.0
+
+Developer Attribution:
+Designed, architected, and engineered by Sameer Tawade, Founder, Executive Director,
+and Sole Developer of Logihertz Systems (OPC) Private Limited.
+Contact: ops@logihertz.com / security@logihertz.com

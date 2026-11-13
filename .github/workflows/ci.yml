@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build & Test (Node.js ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ["20", "22"]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Development Dependencies
+        run: npm install
+
+      - name: Strict Typecheck
+        run: npm run typecheck
+
+      - name: Compile TypeScript
+        run: npm run build
+
+      - name: Run Test Suite (85+ Assertions)
+        run: npm test
+
+      - name: CLI Smoke Test — Version & Help
+        run: |
+          ./bin/lh-waterfall --version
+          ./bin/lh-waterfall --help
+
+      - name: Verify Hardened Dashboard Policy (Score 100/100, Exit 0)
+        run: |
+          ./bin/lh-waterfall scan fixtures/hardened_waterfall_config.json --format table
+          ./bin/lh-waterfall scan fixtures/hardened_waterfall_config.json --format json
+          ./bin/lh-waterfall scan fixtures/hardened_waterfall_config.json --format sarif
+
+      - name: Verify Vulnerable Dashboard Policy (Score 0/100, Exit 1)
+        run: |
+          set +e
+          ./bin/lh-waterfall scan fixtures/vulnerable_waterfall_config.json --format table
+          EXIT_CODE=$?
+          set -e
+          if [ $EXIT_CODE -ne 1 ]; then
+            echo "Expected exit code 1 for vulnerable policy, got $EXIT_CODE"
+            exit 1
+          fi
+
+      - name: Verify IQ Frame Spectral Analysis
+        run: |
+          ./bin/lh-waterfall analyze-iq fixtures/sample_iq_frame.json --fft-size 1024 --window blackman-harris
+
+      - name: Verify GPU Shader Synthesis & Dashboard Generation
+        run: |
+          ./bin/lh-waterfall gen-shaders --backend webgl2
+          ./bin/lh-waterfall gen-shaders --backend webgpu
+          ./bin/lh-waterfall gen-dashboard --output /tmp/test_dash.html
+          grep -q "LOGIHERTZ SDR RF SPECTRUM" /tmp/test_dash.html

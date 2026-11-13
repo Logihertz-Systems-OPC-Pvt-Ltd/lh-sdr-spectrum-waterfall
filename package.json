@@ -1,0 +1,54 @@
+{
+  "name": "lh-sdr-spectrum-waterfall",
+  "version": "0.1.0",
+  "description": "Production-grade TypeScript 60fps WebGL2/WebGPU RF spectrum analyzer & waterfall visualization engine, Radix-2 FFT PSD processor, and 10-rule SDR telemetry dashboard posture auditor.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "lh-waterfall": "bin/lh-waterfall"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "fixtures",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && tsc -p tests/tsconfig.json && node tests/run_tests.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "sdr",
+    "spectrum-analyzer",
+    "waterfall",
+    "webgl2",
+    "webgpu",
+    "fft",
+    "psd",
+    "dsp",
+    "telemetry",
+    "sarif",
+    "posture-auditor"
+  ],
+  "author": "Sameer Tawade <ops@logihertz.com> (Logihertz Systems (OPC) Private Limited)",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Logihertz-Systems-OPC-Pvt-Ltd/lh-sdr-spectrum-waterfall.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Logihertz-Systems-OPC-Pvt-Ltd/lh-sdr-spectrum-waterfall/issues"
+  },
+  "homepage": "https://logihertz.com/",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "typescript": "^5.6.0"
+  }
+}
