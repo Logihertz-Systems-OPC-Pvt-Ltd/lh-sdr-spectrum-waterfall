@@ -1,0 +1,9 @@
+Package: lh-sdr-spectrum-waterfall
+Version: 0.1.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: Sameer Tawade <ops@logihertz.com>
+Homepage: https://www.logihertz.com
+Description: lh-waterfall - Radix-2 Cooley-Tukey FFT & Ring-Buffer Texture Coordinate
+ Zero-dependency TypeScript 60fps WebGL2 (GLSL ES 3.0) & WebGPU (WGSL) O(1) circular ring-buffer RF spectrum waterfall engine, Radix-2 Cooley-Tukey FFT processor, and SDR dashboard posture auditor.
